@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "576050246163",
+    "project_id": "studentmarks-2fbc3",
+    "storage_bucket": "studentmarks-2fbc3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576050246163:android:6c3c9375ffb303306e05e6",
+        "android_client_info": {
+          "package_name": "com.example.studentmarks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHLfaHZ3d8giS3Ddp6L-ilrvmmPL9EL30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
