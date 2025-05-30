@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">StudentMarks</string>
+    <string name="view_all_marks">view_all_marks</string>
+    <string name="submit_marks">submit_marks</string>
+    <string name="total">total</string>
+    <string name="cat">cat</string>
+    <string name="marks">marks</string>
+    <string name="subject_name">subject_name</string>
+    <string name="subject_code">subject_code</string>
+    <string name="student_name">student_name</string>
+    <string name="registration_number">registration_number</string>
+    <string name="enter_the_student_s_details_below">enter_the_student_s_details_below</string>
+    <string name="student_marks_dashboard">student_marks_dashboard</string>
 </resources>

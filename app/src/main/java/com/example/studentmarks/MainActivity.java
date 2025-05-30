@@ -1,24 +1,83 @@
 package com.example.studentmarks;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
+    EditText marks, studentName, subject,student_regNo, subject_code, cat, total;
+    Button  btn_submit;
+    String strStudentName, strMarks, strSubject, strstudent_regNo, strsubject_code, strCat, strTotal;
 
+    Bean Bean;
+
+    public void view_all_marks(View view) {
+        Intent intent = new Intent(getApplicationContext(), Marks.class);
+        startActivity(intent);
+    }
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        total = findViewById(R.id.total);
+        cat = findViewById(R.id.cat);
+        student_regNo = findViewById(R.id.student_regNo);
+        marks = findViewById(R.id.et_marks);
+        studentName = findViewById(R.id.et_student_name);
+        subject_code = findViewById(R.id.subject_code);
+        subject = findViewById(R.id.et_subject);
+        btn_submit = findViewById(R.id.btn_submit);
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                strStudentName = studentName.getText().toString();
+                studentName.setText("");
+
+                strsubject_code = subject_code.getText().toString();
+                subject_code.setText("");
+
+                strCat = cat.getText().toString();
+                cat.setText("");
+
+                strTotal = total.getText().toString();
+                total.setText("");
+
+                strMarks = marks.getText().toString();
+                marks.setText("");
+
+                strSubject = subject.getText().toString();
+                subject.setText("");
+
+                strstudent_regNo = student_regNo.getText().toString();
+                student_regNo.setText("");
+
+                Toast.makeText(getApplicationContext(), "Student " + strStudentName + "Added !", Toast.LENGTH_SHORT).show();
+
+                Bean Bean = new Bean(strStudentName, strsubject_code,strCat, strTotal, strMarks,strSubject, strstudent_regNo);
+
+                connectingToFirebase(Bean);
+            }
         });
     }
+
+    private void connectingToFirebase(Bean Bean) {
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("marks");
+        myRef.push().setValue(Bean);
+    }
+
+
 }
