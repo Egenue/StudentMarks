@@ -32,7 +32,7 @@ public class Marks extends AppCompatActivity {
     private void connectingToFirebase(Bean bean) {
         // Get Firebase database reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("marks");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
