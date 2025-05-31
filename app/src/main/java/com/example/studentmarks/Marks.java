@@ -2,8 +2,13 @@ package com.example.studentmarks;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,10 +26,19 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Marks extends AppCompatActivity {
 
+    EditText marks, studentName, subject,student_regNo, subject_code, cat, total;
+    Button btn_submit, view_all_marks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marks);
+
+        view_all_marks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+            }
+        });
 
         connectingToFirebase(new Bean());
     }
@@ -38,9 +52,23 @@ public class Marks extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                // whenever data at this location is updated
+                Bean value = dataSnapshot.getValue(Bean.class);
+
+                String StudentRegNo = value.getStrstudent_regNo();
+                String StudentName = value.getStrStudentName();
+                String Cat = value.getStrCat();
+                String Marks = value.getStrMarks();
+                String Total = value.getStrTotal();
+                String SubjectName = value.getStrSubject();
+                String SubjectCode = value.getStrsubjectCode();
+                studentName.setText(StudentName);
+                student_regNo.setText(StudentRegNo);
+                cat.setText(Cat);
+                marks.setText(Marks);
+                total.setText(Total);
+                subject.setText(SubjectName);
+                subject_code.setText(SubjectCode);
             }
 
             @Override

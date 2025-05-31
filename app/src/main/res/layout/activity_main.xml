@@ -143,7 +143,6 @@
                 android:text="@string/view_all_marks"
                 android:layout_margin="8dp"
                 android:layout_marginTop="16dp"
-                android:onClick="view_all_marks"
                 android:backgroundTint="@android:color/holo_blue_light" />
         </LinearLayout>
 

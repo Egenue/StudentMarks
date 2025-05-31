@@ -1,6 +1,5 @@
 package com.example.studentmarks;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,21 +14,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     EditText marks, studentName, subject,student_regNo, subject_code, cat, total;
-    Button  btn_submit;
+    Button  btn_submit, view_all_marks;
     String strStudentName, strMarks, strSubject, strstudent_regNo, strsubject_code, strCat, strTotal;
 
     Bean Bean;
 
-    public void view_all_marks(View view) {
-        Intent intent = new Intent(getApplicationContext(), Marks.class);
-        startActivity(intent);
-    }
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        view_all_marks = findViewById(R.id.btn_view_all);
         total = findViewById(R.id.total);
         cat = findViewById(R.id.cat);
         student_regNo = findViewById(R.id.student_regNo);
@@ -38,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         subject_code = findViewById(R.id.subject_code);
         subject = findViewById(R.id.et_subject);
         btn_submit = findViewById(R.id.btn_submit);
+
+        view_all_marks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Marks.class);
+                startActivity(intent);
+            }
+        });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +80,4 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("marks");
         myRef.push().setValue(Bean);
     }
-
-
 }
