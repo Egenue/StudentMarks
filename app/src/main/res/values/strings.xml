@@ -11,4 +11,6 @@
     <string name="registration_number">registration_number</string>
     <string name="enter_the_student_s_details_below">enter_the_student_s_details_below</string>
     <string name="student_marks_dashboard">student_marks_dashboard</string>
+    <string name="type_number">Type number</string>
+    <string name="search">Search</string>
 </resources>
