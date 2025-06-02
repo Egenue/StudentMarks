@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">StudentMarks</string>
-    <string name="view_all_marks">view_all_marks</string>
-    <string name="submit_marks">submit_marks</string>
-    <string name="total">total</string>
-    <string name="cat">cat</string>
-    <string name="marks">marks</string>
-    <string name="subject_name">subject_name</string>
-    <string name="subject_code">subject_code</string>
-    <string name="student_name">student_name</string>
-    <string name="registration_number">registration_number</string>
-    <string name="enter_the_student_s_details_below">enter_the_student_s_details_below</string>
-    <string name="student_marks_dashboard">student_marks_dashboard</string>
-    <string name="type_number">Type number</string>
+    <string name="view_all_marks">View All Marks</string>
+    <string name="submit_marks">Submit Marks</string>
+    <string name="total">Total</string>
+    <string name="cat">Cat</string>
+    <string name="marks">Marks</string>
+    <string name="subject_name">Subject Name</string>
+    <string name="subject_code">Subject Code</string>
+    <string name="student_name">Student Name</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="enter_the_student_s_details_below">Enter The Students\' Details Below</string>
+    <string name="student_marks_dashboard">Student Marks Dashboard</string>
+    <string name="type_number">Type Number</string>
     <string name="search">Search</string>
 </resources>
