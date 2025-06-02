@@ -20,27 +20,23 @@ public class Marks extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marks);
-
         btn_view_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 connectingToFirebase(new Bean());
             }
         });
-
     }
     private void connectingToFirebase(Bean bean) {
         // Get Firebase database reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("marks");
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated
                 Bean value = dataSnapshot.getValue(Bean.class);
-
                 String StudentRegNo = value.getStrstudent_regNo();
                 String StudentName = value.getStrStudentName();
                 String Cat = value.getStrCat();
@@ -56,7 +52,6 @@ public class Marks extends AppCompatActivity {
                 subject.setText(SubjectName);
                 subject_code.setText(SubjectCode);
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -64,5 +59,4 @@ public class Marks extends AppCompatActivity {
             }
         });
     }
-
 }
