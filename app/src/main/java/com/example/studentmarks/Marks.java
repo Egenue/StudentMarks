@@ -6,56 +6,56 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Marks extends AppCompatActivity {
-    TextView marks, studentName, subject, subject_code,student_regNo, cat, total;
-    Button btn_view_all;
+    private RecyclerView recyclerView;
+    private MarksAdapter adapter;
+    private List<Bean> marksList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marks);
-        btn_view_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectingToFirebase(new Bean());
-            }
-        });
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MarksAdapter(marksList);
+        recyclerView.setAdapter(adapter);
+
+        fetchDataFromFirebase();
     }
-    private void connectingToFirebase(Bean bean) {
-        // Get Firebase database reference
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("marks");
-        myRef.addValueEventListener(new ValueEventListener() {
+
+    private void fetchDataFromFirebase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("marks");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated
-                Bean value = dataSnapshot.getValue(Bean.class);
-                String StudentRegNo = value.getStrstudent_regNo();
-                String StudentName = value.getStrStudentName();
-                String Cat = value.getStrCat();
-                String Marks = value.getStrMarks();
-                String Total = value.getStrTotal();
-                String SubjectName = value.getStrSubject();
-                String SubjectCode = value.getStrsubjectCode();
-                studentName.setText(StudentName);
-                student_regNo.setText(StudentRegNo);
-                cat.setText(Cat);
-                marks.setText(Marks);
-                total.setText(Total);
-                subject.setText(SubjectName);
-                subject_code.setText(SubjectCode);
+            public void onDataChange(DataSnapshot snapshot) {
+                marksList.clear();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Bean bean = child.getValue(Bean.class);
+                    marksList.add(bean);
+                }
+                adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Toast.makeText(Marks.this, "Failed to load data", Toast.LENGTH_SHORT).show();
             }
         });
     }
