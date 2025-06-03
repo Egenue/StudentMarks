@@ -12,14 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:context=".Marks">
-        <EditText
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints="@string/type_number"
-            android:textSize="30sp"
-            android:hint="@string/type_number"/>
         <Button
             android:id="@+id/btn_view_all"
             android:layout_width="0dp"
